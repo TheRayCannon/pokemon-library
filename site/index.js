@@ -3,6 +3,7 @@ const url = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=151"
 const spinner = document.querySelector(".spinner")
 
 
+
 function addImage(pokemon) {
     const div = document.createElement("div")
     div.innerHTML = `
@@ -13,6 +14,9 @@ function addImage(pokemon) {
         //const img = document.createElement("img")
         //img.src = url
     dex.append(div)
+}
+
+function pokemonList(pokemon) {
 
 }
 
@@ -32,6 +36,5 @@ fetch(url)
         responses.forEach(response => {
             spinner.classList.add("hidden")
             addImage(response)
-
         })
     })

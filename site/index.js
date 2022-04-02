@@ -1,40 +1,59 @@
 const dex = document.querySelector(".pokemon")
-const url = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=151"
+const url = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=128"
 const spinner = document.querySelector(".spinner")
 
 
 
-function addImage(pokemon) {
-    const div = document.createElement("div")
-    div.innerHTML = `
-     <a href="pokemon.html?pokemon=${pokemon.name}">
-        <img src="${pokemon.sprites.front_shiny}" alt="${pokemon.name}"/>
-     </a>
-    `
-        //const img = document.createElement("img")
-        //img.src = url
-    dex.append(div)
-}
 
-function pokemonList(pokemon) {
-
-}
 
 fetch(url)
+    .then(response => response.json())
     .then(response => {
-        return response.json()
-    }).then(parsedResponse => {
-        const urls = parsedResponse.results.map(result => result.url)
-        const fetches = urls.map(url => fetch(url).then(
-            response => response.json()
-        ))
-        return Promise.all(fetches)
-            //const imageUrl = parsedResponse.sprites.front_default
-            //addImage(imageUrl)
+        const pokemonList = response.results
+        const httpReq = pokemonList
+            .map(pokemon => pokemon.url)
+            .map(url => {
+                return fetch(url)
+                    .then(response => response.json())
+            })
+        return Promise.all(httpReq)
+    })
+    .then(responses => {
 
-    }).then(responses => {
-        responses.forEach(response => {
-            spinner.classList.add("hidden")
-            addImage(response)
+        responses.map(response => {
+            const name = responses
+                .map(response => response.species.name)
+                .map(name => {
+                    return `${response.species.name[0].toUpperCase()}${response.species.name.slice(1)}`
+                })
+
+            const li = document.createElement("li")
+            li.textContent = name
+            const img = document.createElement("img")
+            img.src = response.sprites.front_shiny
+            li.append(img)
+            return li
+        }).forEach(li => {
+            dex.append(li)
         })
     })
+
+/* pokemonList
+            .map(pokemon => {
+                return pokemon.name
+
+            }).map(name => {
+                return `${name[0].toUpperCase()}${name.slice(1)}`
+            })
+            .map(name => {
+                const li = document.createElement("li")
+                li.textContent = name
+                return li
+            })
+            .forEach(li => {
+                dex.append(li)
+            })
+        return pokemonList
+    }).then(pokemonList => {
+        console.log(pokemonList)
+    }) */

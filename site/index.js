@@ -37,23 +37,3 @@ fetch(url)
             dex.append(li)
         })
     })
-
-/* pokemonList
-            .map(pokemon => {
-                return pokemon.name
-
-            }).map(name => {
-                return `${name[0].toUpperCase()}${name.slice(1)}`
-            })
-            .map(name => {
-                const li = document.createElement("li")
-                li.textContent = name
-                return li
-            })
-            .forEach(li => {
-                dex.append(li)
-            })
-        return pokemonList
-    }).then(pokemonList => {
-        console.log(pokemonList)
-    }) */

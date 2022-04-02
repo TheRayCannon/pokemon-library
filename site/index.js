@@ -28,7 +28,7 @@ fetch(url)
                 })
 
             const li = document.createElement("li")
-            li.textContent = name
+            li.textContent = name[0]
             const img = document.createElement("img")
             img.src = response.sprites.front_shiny
             li.append(img)

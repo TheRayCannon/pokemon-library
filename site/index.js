@@ -9,7 +9,6 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=128")
             .map(url => {
                 return fetch(url).then(response => response.json())
             })
-        console.log(httpReq)
         return Promise.all(httpReq)
     }).then(responses => {
         responses.map(response => {

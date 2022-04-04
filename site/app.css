@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 .spinner {
     width: 300px;
 }
@@ -6,8 +7,6 @@
     display: none;
 }
 
-
-/*
 .entry {
     display: flex;
     justify-content: center;
@@ -24,19 +23,62 @@
 }
 
 .pokemon {
+    width: 290px;
+    height: 550px;
+    margin: 75px;
+    padding: 15px;
+    background-color: blue;
+    overflow-x: hidden;
+    border-color: red;
+    border-radius: 10px;
+    border-style: groove;
+}
+
+.pokemon a {
+    color: yellow;
+    padding-bottom: 20px;
+}
+
+.pokemonDetails {
+    color: rgb(255, 255, 255);
+}
+
+.specs {
+    display: block;
     background-color: blue;
     width: 650px;
-    border: 5px;
+    height: auto;
     border-color: red;
     border-radius: 10px;
     border-style: groove;
     margin: 75px;
     padding: 5px;
+    color: rgb(255, 255, 255);
+}
+
+.specs h2 {
+    color: yellow;
+}
+
+.pokemonDetails>figure {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.dexEntry {
+    display: flex;
+    justify-content: center;
+}
+
+figcaption {
+    font-size: large;
+    font-weight: bolder;
 }
 
 main {
     display: flex;
     justify-content: center;
     align-content: center;
+    font-family: 'Press Start 2P';
 }
-*/

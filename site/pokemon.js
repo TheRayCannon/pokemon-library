@@ -4,6 +4,7 @@ const query = new URLSearchParams(url.search)
 const main = document.querySelector("main")
 
 
+
 fetch(`https://pokeapi.co/api/v2/pokemon/${query.get("pokemon")}`)
     .then(response => response.json())
     .then(response => {
@@ -11,14 +12,14 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${query.get("pokemon")}`)
         const title = document.querySelector("title");
         title.textContent = name;
         const pokemonDetails = document.createElement("div")
-        pokemonDetails.classList = "pokemon-details"
+        pokemonDetails.classList = "pokemonDetails"
         pokemonDetails.innerHTML = `
                 <figure>
-                    <img src ="${response.sprites.front_shiny}" alt="${name}" />
-                    <figcaption>${name}</figcaption>
+                <h2>${name}</h2>    
+                <img src ="${response.sprites.front_shiny}" alt="${name}" /> 
                 </figure>
 
-                <h2>Abilities</h2>
+                <h3>Abilities</h3>
             `;
         main.append(pokemonDetails);
         spinner.classList.add("hidden")
@@ -36,10 +37,10 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${query.get("pokemon")}`)
         response.map(response => {
             const li = document.createElement("li")
             li.innerHTML = `
-                    <span class="move-name">
+                    <span class="ability-name">
                         ${response.name[0].toUpperCase()}${response.name.slice(1)}
                     </span>
-                    <span class="move-description">
+                    <span class="ability-short-description">
                         ${response.effect_entries[1].short_effect}
                     </span>
                     `

@@ -1,39 +1,35 @@
-const dex = document.querySelector(".pokemon")
-const url = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=128"
-const spinner = document.querySelector(".spinner")
+const ul = document.querySelector("ul")
 
-
-
-
-const retrive = fetch(url)
-retrive
+fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=128")
     .then(response => response.json())
-    .then(response => {
-        const pokemonList = response.results
-        const httpReq = pokemonList
+    .then((response) => {
+        const pokeBall = response.results
+        const httpReq = pokeBall
             .map(pokemon => pokemon.url)
             .map(url => {
-                return fetch(url)
-                    .then(response => response.json())
+                return fetch(url).then(response => response.json())
             })
+        console.log(httpReq)
         return Promise.all(httpReq)
-    })
-    .then(responses => {
+    }).then(responses => {
         responses.map(response => {
-            const name = responses
-                .map(response => response.species.name)
-                .map(name => {
-                    return `${response.species.name[0].toUpperCase()}${response.species.name.slice(1)}`
-                })
-            const li = document.createElement("li")
-            li.classList.add("pokemonList")
-            li.textContent = name[0]
-            const img = document.createElement("img")
-            img.src = response.sprites.front_shiny
+            const pokemonList = document.createElement("dic")
+            pokemonList.classList = "pokemon-list"
+            const name = `${response.species.name[0].toUpperCase()}${response.species.name.slice(1)}`;
+            pokemonList.innerHTML = `
+                <figure>
+                    <img src ="${response.sprites.front_shiny}" alt="${name}" />
+                    <figcaption>
+                        <a href="pokemon.html?pokemon=${response.id}">
+                            ${name}
+                        </a>
+                    </figcaption>
+                </figure>
+            `
+            return pokemonList
+        }).forEach(pokemonList => {
+            const spinner = document.querySelector(".spinner")
             spinner.classList.add("hidden")
-            li.append(img)
-            return li
-        }).forEach(li => {
-            dex.append(li)
+            ul.append(pokemonList)
         })
     })

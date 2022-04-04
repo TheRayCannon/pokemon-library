@@ -5,8 +5,8 @@ const spinner = document.querySelector(".spinner")
 
 
 
-
-fetch(url)
+const retrive = fetch(url)
+retrive
     .then(response => response.json())
     .then(response => {
         const pokemonList = response.results
@@ -19,18 +19,18 @@ fetch(url)
         return Promise.all(httpReq)
     })
     .then(responses => {
-
         responses.map(response => {
             const name = responses
                 .map(response => response.species.name)
                 .map(name => {
                     return `${response.species.name[0].toUpperCase()}${response.species.name.slice(1)}`
                 })
-
             const li = document.createElement("li")
+            li.classList.add("pokemonList")
             li.textContent = name[0]
             const img = document.createElement("img")
             img.src = response.sprites.front_shiny
+            spinner.classList.add("hidden")
             li.append(img)
             return li
         }).forEach(li => {

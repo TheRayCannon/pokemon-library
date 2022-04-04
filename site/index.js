@@ -13,7 +13,7 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=128")
         return Promise.all(httpReq)
     }).then(responses => {
         responses.map(response => {
-            const pokemonList = document.createElement("dic")
+            const pokemonList = document.createElement("div")
             pokemonList.classList = "pokemon-list"
             const name = `${response.species.name[0].toUpperCase()}${response.species.name.slice(1)}`;
             pokemonList.innerHTML = `

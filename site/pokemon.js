@@ -12,18 +12,16 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${query.get("pokemon")}`)
         const title = document.querySelector("title");
         title.textContent = name;
         const pokemonDetails = document.createElement("div")
-        pokemonDetails.classList = "pokemonDetails"
+        pokemonDetails.classList.add("pokemonDetails")
         pokemonDetails.innerHTML = `
                 <figure>
                 <h2>${name}</h2>    
                 <img src ="${response.sprites.front_shiny}" alt="${name}" /> 
                 </figure>
-
                 <h3>Abilities</h3>
             `;
         main.append(pokemonDetails);
         spinner.classList.add("hidden")
-        console.log(response)
         const abilityList = response.abilities
             .map(response => response.ability.url)
             .map(url => {
@@ -32,7 +30,7 @@ fetch(`https://pokeapi.co/api/v2/pokemon/${query.get("pokemon")}`)
         return Promise.all(abilityList)
     }).then(response => {
         const ul = document.createElement("ul")
-        ul.classList = "abilities"
+        ul.classList.add("abilities")
         main.append(ul)
         response.map(response => {
             const li = document.createElement("li")
